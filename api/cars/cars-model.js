@@ -5,11 +5,11 @@ const getAll = () => {
 }
 
 const getById = (id) => {
-  return db('cars').where('id', id)
+  return db('cars').where('id', id).first()
 }
 
-const create = () => {
-  // DO YOUR MAGIC
+const create = (car) => {
+  db('cars').insert(car)
 }
 
 module.exports = {
