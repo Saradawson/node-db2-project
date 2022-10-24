@@ -19,7 +19,7 @@ router.get('/', async (req, res, next) => {
    }
 })
 
-router.get('/:id', async (req, res, next) => {
+router.get('/:id', checkCarId, async (req, res, next) => {
     try{
         res.json(req.car)
     }catch(err) {
@@ -34,7 +34,8 @@ router.post(
     checkVinNumberUnique,
      async (req, res, next) => {
     try{
-        res.json('router post')
+        const car = await Car.create(req.body)
+        res.json(car)
     }catch(err) {
         next(err)
     }

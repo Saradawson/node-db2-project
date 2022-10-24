@@ -5,15 +5,16 @@ const getAll = () => {
 }
 
 const getById = (id) => {
-  return db('cars').where('id', id)
+  return db('cars').where('id', id).first()
 }
 
 const getByVin = (vin) => {
-  return db('cars').where('vin', vin)
+  return db('cars').where('vin', vin).first()
 }
 
 const create = (car) => {
-  db('cars').insert(car)
+  return db('cars').insert(car)
+  .then(([id]) => getById(id))
 }
 
 module.exports = {
