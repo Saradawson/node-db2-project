@@ -8,23 +8,38 @@ const checkCarId = async (req, res, next) => {
         message: `car with id ${req.params.id} is not found`
       })
     }else{
+      req.car = car
       next()
     }
   }catch(err) {
-
+    next(err)
   }
 }
 
 const checkCarPayload = (req, res, next) => {
-  // DO YOUR MAGIC
+  if(!req.body.vin) return res.status(400).json({
+    message: 'vin is missing'
+  })
+  if(!req.body.make) return res.status(400).json({
+    message: 'make is missing'
+  })
+  if(!req.body.model) return res.status(400).json({
+    message: 'model is missing'
+  })
+  if(!req.body.mileage) return res.status(400).json({
+    message: 'mileage is missing'
+  })
+  else{
+    next()
+  }
 }
 
 const checkVinNumberValid = (req, res, next) => {
-  // DO YOUR MAGIC
+  next()
 }
 
 const checkVinNumberUnique = (req, res, next) => {
-  // DO YOUR MAGIC
+  next()
 }
 
 module.exports ={
